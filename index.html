@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rust code raid</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script src="js/dataLoader.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="header">Rust code raid pin assigner</h1>
+        <form class="form mb-3">
+            <div class="mb-3 row">
+                <label class="form-label" for="dataUrl">Data url</label>
+                <div class="col-11">
+                    <input id="dataURL" type="text" name="dataURL" class="form-control" placeholder="https://..."
+                        required>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuPresets"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Presets
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuPresets">
+                        <button class="dropdown-item" type="button" onClick="dataURL.value = this.value"
+                            value="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/four-digit-pin-codes-sorted-by-frequency-withcount.csv">
+                            #1. <strong>four-digit-pin-codes-sorted-by-frequency</strong> [Delimiter "," | Index 0]
+                        </button>
+                        <button class="dropdown-item" type="button" onClick="dataURL.value = this.value"
+                            value="https://raw.githubusercontent.com/SamMauldin/codera1d-server/master/src/pin_codes.csv">
+                            #2. <strong>codera1d-pin_codes</strong> [Delimiter ";" | Index 0] (same as #1)
+                        </button>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-4">
+                    <label class=form-label for="delimiter">Delimiter</label>
+                    <input id="delimiter" name="delimiter" type="text" class="form-control" required>
+                </div>
+                <div class="col-4">
+                    <label class=form-label for="splitIndex">Index</label>
+                    <input id="splitIndex" name="splitIndex" type="number" class="form-control" required>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-4">
+                    <label class=form-label for="numberCodeCrackers">Number of code crackers</label>
+                    <input id="numberCodeCrackers" name="numberCodeCrackers" type="number" class="form-control"
+                        required>
+                </div>
+                <div class="col-4">
+                    <label class=form-label for="numberK">K (Number of cracker)</label>
+                    <input id="numberK" name="numberK" type="number" class="form-control" default=0 required>
+                </div>
+                <div class="col-4">
+                    <label class=form-label for="start">Start (offset)</label>
+                    <input id="start" name="start" type="number" class="form-control">
+                </div>
+            </div>
+
+            <input id="submit" type="submit" class="btn btn-primary mb-3" value="Generate pins">
+            <div id="alertDanger" class="alert alert-danger alert-dismissible fade show" hidden="true">
+                <div id="alertText"></div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </form>
+
+        <table class="table" id="tablePins">
+            <caption>Pins table</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pin</th>
+                    <th scope="col">Complete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
